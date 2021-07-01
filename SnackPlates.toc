@@ -1,0 +1,7 @@
+## Interface: 90100
+## Title: SnackPlates
+## Version: 90100.00
+## Author: Snackington
+## Notes: The simplest threat plates
+
+SnackPlates.lua
