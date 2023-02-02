@@ -1,6 +1,6 @@
-## Interface: 90100
+## Interface: 100005
 ## Title: SnackPlates
-## Version: 90100.00
+## Version: 100005.00
 ## Author: Snackington
 ## Notes: The simplest threat plates
 
