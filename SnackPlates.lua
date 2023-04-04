@@ -1,6 +1,10 @@
 --The most simple way I can think of to get threat plates.
 --Minimal changes, just changing color on blizz bars.
 
+local playerIsTank = function()
+	return GetSpecializationRole(GetSpecialization()) == "TANK"
+end
+
 local isTank = function(t)
     return UnitGroupRolesAssigned(t) == "TANK"
 end
@@ -9,7 +13,7 @@ local isOfftanked = function(frame)
 	local t2 = frame.displayedUnit.."target"
 
     if UnitPlayerOrPetInRaid(t2) or UnitPlayerOrPetInParty(t2) then
-        if not UnitIsUnit("player", t2) and isTank(t2) and isTank("player") then
+        if not UnitIsUnit("player", t2) and isTank(t2) and playerIsTank() then
             return true
         end
     end
@@ -18,7 +22,7 @@ local isOfftanked = function(frame)
 end
 
 local threatColor = function(s)
-	if isTank("player") then
+	if playerIsTank() then
 		if s == 0 then
 			return 1.0, 0.0, 0.0
 		elseif s == 1 then
