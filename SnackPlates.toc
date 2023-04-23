@@ -1,7 +1,0 @@
-## Interface: 100007
-## Title: SnackPlates
-## Version: 100007.00
-## Author: Snackington
-## Notes: The simplest threat plates
-
-SnackPlates.lua
