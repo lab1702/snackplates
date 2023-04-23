@@ -6,17 +6,17 @@ local playerIsTank = function()
 end
 
 local isTank = function(t)
-    return UnitGroupRolesAssigned(t) == "TANK"
+	return UnitGroupRolesAssigned(t) == "TANK"
 end
 
 local isOfftanked = function(frame)
 	local t2 = frame.displayedUnit.."target"
 
-    if UnitPlayerOrPetInRaid(t2) or UnitPlayerOrPetInParty(t2) then
-        if not UnitIsUnit("player", t2) and isTank(t2) and playerIsTank() then
-            return true
-        end
-    end
+	if UnitPlayerOrPetInRaid(t2) or UnitPlayerOrPetInParty(t2) then
+		if not UnitIsUnit("player", t2) and isTank(t2) and playerIsTank() then
+			return true
+		end
+	end
 
     return false
 end
