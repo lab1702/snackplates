@@ -18,7 +18,7 @@ local isOfftanked = function(frame)
 		end
 	end
 
-    return false
+	return false
 end
 
 local threatColor = function(s)
