@@ -54,32 +54,26 @@ hooksecurefunc("CompactUnitFrame_UpdateHealthColor", function(frame)
 		return
 	elseif C_NamePlate.GetNamePlateForUnit(frame.unit) == C_NamePlate.GetNamePlateForUnit("player") then
 		return
-	elseif not UnitIsConnected(frame.displayedUnit) then
-		r, g, b = 0.5, 0.5, 0.5
-	else
-		local col = RAID_CLASS_COLORS[select(2, UnitClass(frame.displayedUnit))]
+	elseif UnitIsPlayer(frame.displayedUnit) or (not UnitIsConnected(frame.displayedUnit)) then
+		return
+	elseif CompactUnitFrame_IsTapDenied(frame) then
+		r, g, b = 0.1, 0.1, 0.1
+	elseif CompactUnitFrame_IsOnThreatListWithPlayer(frame.displayedUnit) then
+		local s = UnitThreatSituation("player", frame.displayedUnit)
 
-		if CompactUnitFrame_IsTapDenied(frame) then
-			r, g, b = 0.1, 0.1, 0.1
-		elseif UnitIsPlayer(frame.displayedUnit) and col then
-			r, g, b = col.r, col.g, col.b
-		elseif CompactUnitFrame_IsOnThreatListWithPlayer(frame.displayedUnit) then
-			local s = UnitThreatSituation("player", frame.displayedUnit)
-
-			if isOfftanked(frame) then
-				if s > 0 then
-					r, g, b = 1.0, 0.5, 1.0
-				else
-					r, g, b = 0.0, 0.5, 1.0
-				end
+		if isOfftanked(frame) then
+			if s > 0 then
+				r, g, b = 1.0, 0.5, 1.0
 			else
-				r, g, b = threatColor(s)
+				r, g, b = 0.0, 0.5, 1.0
 			end
-		elseif isOfftanked(frame) then
-			r, g, b = 0.0, 0.5, 1.0
 		else
-			r, g, b = UnitSelectionColor(frame.displayedUnit)
+			r, g, b = threatColor(s)
 		end
+	elseif isOfftanked(frame) then
+		r, g, b = 0.0, 0.5, 1.0
+	else
+		return
 	end
 
 	frame.healthBar:SetStatusBarColor(r, g, b)
