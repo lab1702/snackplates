@@ -73,7 +73,7 @@ hooksecurefunc("CompactUnitFrame_UpdateHealthColor", function(frame)
 	elseif isOfftanked(frame) then
 		r, g, b = 0.0, 0.5, 1.0
 	else
-		return
+		r, g, b = UnitSelectionColor(frame.displayedUnit)
 	end
 
 	frame.healthBar:SetStatusBarColor(r, g, b)
